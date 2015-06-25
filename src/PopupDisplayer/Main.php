@@ -24,7 +24,7 @@ class Main extends PluginBase implements Listener{
 		@mkdir($this->getDataFolder()); //crea la cartella dove sara il config.yml
 		$this->saveDefaultConfig(); //salva la configurazione di default del config.yml
 		$this->cfg = $this->getConfig(); //prende le informazioni dal config.yml
-		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this, $message, $cfg["duration"]), 10);
+		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this, $this->cfg->get("duration")), 10);
 	}	
 	
 	public function onPlayerJoin(PlayerJoinEvent  $event){
@@ -32,7 +32,7 @@ class Main extends PluginBase implements Listener{
 		$message = $this->cfg->get("message");
 		if($type == "tip"){
 			$event->getPlayer()->sendTip($message);
-		}elseif($type === "popup"){
+		}elseif($type == "popup"){
 			$event->getPlayer()->sendPopup($message);
 		}
 	}
